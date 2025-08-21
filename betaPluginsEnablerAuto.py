@@ -18,8 +18,14 @@ def resource_path(relative_path):
 
 def main():
     try:
+        # Add certificate verification
         keysUrl = "https://raw.githubusercontent.com/goatcorp/dalamud-declarative/main/config.yaml"
-        response = requests.get(keysUrl, allow_redirects=True)
+        response = requests.get(keysUrl, allow_redirects=True, verify=True)
+        
+        # Add user confirmation before making changes
+        print("About to update XIVLauncher configuration.")
+        input("Press Enter to continue or CTRL+C to cancel...")
+        
         content = response.content.decode("utf-8")
         content = yaml.safe_load(content)
 
